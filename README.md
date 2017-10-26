@@ -6,4 +6,9 @@ Selector Generator Plus(快速生成SelectorDrawable和SelectorColor)
 进行的修改，在此感谢。
 
 
-#插件配置
+## 插件配置
+你可以在Android Studio的设置---other settings里设置
+
+1.开启自定义文件名称
+
+2.自动打开文件
