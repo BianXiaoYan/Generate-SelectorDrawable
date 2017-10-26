@@ -2,11 +2,10 @@
     <id>com.guohe.selector</id>
     <name>Selector Generator Plus</name>
     <version>1.0.1</version>
-    <vendor email="huhansan0613@gmail" url="">Guohe</vendor>
+    <vendor email="huhansan0613@gmail" url="https://github.com/skibug/SelectorGeneratorPlus">Guohe</vendor>
 
     <description><![CDATA[
       自动生成android Selector Drawable&Color.<br>
-      <em>most HTML tags may be used</em>
     ]]></description>
 
     <change-notes><![CDATA[
