@@ -21,7 +21,9 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.StatusBar;
 import com.intellij.openapi.wm.WindowManager;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
 import com.intellij.ui.awt.RelativePoint;
 import org.xml.sax.SAXException;
 
@@ -59,7 +61,7 @@ public class SelectorColorAction extends BaseAction {
             return;
         }
         secondParent = psiFile.getVirtualFile().getParent().getParent();
-        contentStr = psiFile.getText();
+        contentStr = editor.getSelectionModel().getSelectedText();
         if (contentStr == null || contentStr.isEmpty()) {
             event.getPresentation().setEnabled(false);
             return;
@@ -158,6 +160,14 @@ public class SelectorColorAction extends BaseAction {
      */
     private boolean getColorList(AnActionEvent event) {
 
+        PsiFile psiFile = event.getData(LangDataKeys.PSI_FILE);
+        Editor editor = event.getData(PlatformDataKeys.EDITOR);
+        if (psiFile == null || editor == null) {
+            return false;
+        }
+        contentStr = editor.getSelectionModel().getSelectedText();
+        contentStr = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<resources>" + contentStr + "</resources>";
         try {
             colorSaxHandler = new ColorSaxHandler();
             colorSaxHandler.createViewList(contentStr);
