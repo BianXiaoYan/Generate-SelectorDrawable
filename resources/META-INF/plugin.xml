@@ -1,8 +1,8 @@
 <idea-plugin version="2">
     <id>com.guohe.selector</id>
-    <name>Selector Generator Plus</name>
+    <name>Selector Generator</name>
     <version>1.0.0</version>
-    <vendor email="243716195@qq.com" url="https://github.com/skibug/SelectorGeneratorPlus">Guohe</vendor>
+    <vendor email="243716195@qq.com" url="https://github.com/BianXiaoYan/Generate-SelectorDrawable.git">Guohe</vendor>
 
     <description><![CDATA[
       自动生成android Selector Drawable&Color.<br>
