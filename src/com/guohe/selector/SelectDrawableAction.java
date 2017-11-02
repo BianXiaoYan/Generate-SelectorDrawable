@@ -29,20 +29,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 
-
-public class SelectDrawableAction extends BaseAction
-{
+public class SelectDrawableAction extends BaseAction {
     List<DrawableFile> drawableFileList = new ArrayList<>();
 
     boolean isDirectory = false;
 
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent)
-    {
+    public void actionPerformed(AnActionEvent anActionEvent) {
         if (anActionEvent == null)
             return;
-        if (isDirectory)
-        {
+        if (isDirectory) {
             String string = Config.getString(ResourceConfig.PLEASE_DONT_SELECT_FOLDER);
             showInfoDialog(string, anActionEvent);
             return;
@@ -54,20 +50,15 @@ public class SelectDrawableAction extends BaseAction
         String title = Config.getString(ResourceConfig.SET_TITLE);
         String message = Config.getString(ResourceConfig.PLEASE_ENTER_SELECTORDRAWABLE_NAME);
         if (PropertiesUtil.getCustomFileNameState()) {
-            do
-            {
-                if (selectorDrawableName == null)
-                {
-                } else if ("".equals(selectorDrawableName.trim()))
-                {
+            do {
+                if (selectorDrawableName == null) {
+                } else if ("".equals(selectorDrawableName.trim())) {
                     String string = Config.getString(ResourceConfig.PLEASE_ENTER_SELECTORDRAWABLE_NAME);
                     showErrorDialog(string, anActionEvent);
-                } else if (FileOperation.isFindChild(secondParent, FileOperation.addSuffixXml(selectorDrawableName)))
-                {
+                } else if (FileOperation.isFindChild(secondParent, FileOperation.addSuffixXml(selectorDrawableName))) {
                     String string = Config.getString(ResourceConfig.FILE_ALREADY_EXISTS);
                     showErrorDialog(string, anActionEvent);
-                } else if (!FileOperation.isValidFileName(FileOperation.addSuffixXml(selectorDrawableName)))
-                {
+                } else if (!FileOperation.isValidFileName(FileOperation.addSuffixXml(selectorDrawableName))) {
                     String string = Config.getString(ResourceConfig.FILE_NAME_INVALID);
                     showErrorDialog(string, anActionEvent);
                 }
@@ -78,7 +69,7 @@ public class SelectDrawableAction extends BaseAction
                     && ("".equals(selectorDrawableName.trim())
                     || (FileOperation.isFindChild(secondParent, FileOperation.addSuffixXml(selectorDrawableName)))
                     || (!FileOperation.isValidFileName(FileOperation.addSuffixXml(selectorDrawableName)))));
-        }else {
+        } else {
             selectorDrawableName = newFileName;
         }
 
@@ -89,18 +80,14 @@ public class SelectDrawableAction extends BaseAction
 
         Collections.sort(drawableFileList);
 
-        ApplicationManager.getApplication().runWriteAction(new Runnable()
-        {
+        ApplicationManager.getApplication().runWriteAction(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 //创建drawable 文件夹
                 VirtualFile virtualFile = null;
-                try
-                {
+                try {
                     virtualFile = FileOperation.creteDir(secondParent, Constants.DRAWABLE);
-                } catch (IOException e)
-                {
+                } catch (IOException e) {
                     String string = Config.getString(ResourceConfig.CREATE_DRAWABLE_DIR_FAILED);
                     showErrorDialog(string, finalAnActionEvent);
                     e.printStackTrace();
@@ -108,22 +95,18 @@ public class SelectDrawableAction extends BaseAction
                 }
                 //创建 selector 文件
                 VirtualFile selectorVirtualFile = null;
-                try
-                {
+                try {
                     selectorVirtualFile = FileOperation.creteFile(virtualFile, selectorDrawableName);
-                } catch (IOException e)
-                {
+                } catch (IOException e) {
                     String string = Config.getString(ResourceConfig.CREATE_SELECTORDRAWABLE_FILE_FAILED);
                     showErrorDialog(string, finalAnActionEvent);
                     e.printStackTrace();
                     return;
                 }
                 //生成selector文件内容
-                try
-                {
+                try {
                     SelectorDrawableGenerator.generate(drawableFileList, selectorVirtualFile);
-                } catch (IOException e)
-                {
+                } catch (IOException e) {
                     String string = Config.getString(ResourceConfig.GENERATE_SELECTORDRAWABLE_FILE_CONTENT_FAIL);
                     showErrorDialog(string, finalAnActionEvent);
                     e.printStackTrace();
@@ -139,43 +122,43 @@ public class SelectDrawableAction extends BaseAction
     }
 
     @Override
-    public void update(AnActionEvent e)
-    {
+    public void update(AnActionEvent e) {
         drawableFileList.clear();
         selectorDrawableName = null;
         isDirectory = false;
 
         VirtualFile[] virtualFiles = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
         DrawableFile drawableFile = new DrawableFile();
-        for (int i = 0; i < virtualFiles.length; i++)
-        {
+        for (int i = 0; i < virtualFiles.length; i++) {
             VirtualFile virtualFile = virtualFiles[i];
 
             //如果是文件夹，则不可用
-            if (virtualFile.isDirectory())
-            {
+            if (virtualFile.isDirectory()) {
                 isDirectory = true;
                 break;
             }
 
             VirtualFile firstParent = virtualFile.getParent();
-            if ((!firstParent.exists()) || (!firstParent.isDirectory()))
-            {
+            if ((!firstParent.exists()) || (!firstParent.isDirectory())) {
                 e.getPresentation().setEnabled(false);
                 break;
             }
 
             String name = firstParent.getName();
             Matcher matcher = Constants.VALID_FOLDER_PATTERN.matcher(name);
-            if (!matcher.matches())
-            {
-                e.getPresentation().setEnabled(false);
-                return;
+            if (!matcher.matches()) {
+
+                matcher = Constants.VALID_FOLDER_PATTERN_1.matcher(name);
+                if (!matcher.matches()) {
+
+                    e.getPresentation().setEnabled(false);
+                    return;
+                }
+
             }
 
             secondParent = firstParent.getParent();
-            if (secondParent == null || (!secondParent.isDirectory()) || (!secondParent.getName().equals(Constants.RES)))
-            {
+            if (secondParent == null || (!secondParent.isDirectory()) || (!secondParent.getName().equals(Constants.RES))) {
                 e.getPresentation().setEnabled(false);
                 break;
             }
@@ -191,6 +174,16 @@ public class SelectDrawableAction extends BaseAction
             DrawableStatus drawableStatusByName = DrawableStatus.getDrawableStatusByName(replacePoint9Name);
 
             DrawableFile clone = (DrawableFile) drawableFile.clone();
+            name = firstParent.getName();
+            matcher = Constants.VALID_FOLDER_PATTERN.matcher(name);
+            if (matcher.matches()) {
+                clone.setDrawable(true);
+            }
+            name = firstParent.getName();
+            matcher = Constants.VALID_FOLDER_PATTERN_1.matcher(name);
+            if (matcher.matches()) {
+                clone.setDrawable(false);
+            }
             clone.setSimpleName(replacePoint9Name);
             clone.setStatus(true);
             clone.setFullPathName(virtualFile.getPresentableUrl());
@@ -201,16 +194,14 @@ public class SelectDrawableAction extends BaseAction
         }
     }
 
-    private void showInfoDialog(String text, AnActionEvent e)
-    {
+    private void showInfoDialog(String text, AnActionEvent e) {
         StatusBar statusBar = WindowManager.getInstance().getStatusBar((Project) DataKeys.PROJECT.getData(e.getDataContext()));
 
         if (statusBar != null)
             JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(text, MessageType.INFO, null).setFadeoutTime(10000L).createBalloon().show(RelativePoint.getCenterOf(statusBar.getComponent()), Balloon.Position.atRight);
     }
 
-    private void showErrorDialog(String text, AnActionEvent e)
-    {
+    private void showErrorDialog(String text, AnActionEvent e) {
         StatusBar statusBar = WindowManager.getInstance().getStatusBar((Project) DataKeys.PROJECT.getData(e.getDataContext()));
 
         if (statusBar != null)

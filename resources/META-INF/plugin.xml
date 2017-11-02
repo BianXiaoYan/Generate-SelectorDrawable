@@ -1,8 +1,8 @@
 <idea-plugin version="2">
     <id>com.guohe.selector</id>
     <name>Selector Generator Plus</name>
-    <version>1.0.2</version>
-    <vendor email="huhansan0613@gmail.com" url="https://github.com/skibug/SelectorGeneratorPlus">Guohe</vendor>
+    <version>1.0.0</version>
+    <vendor email="243716195@qq.com" url="https://github.com/skibug/SelectorGeneratorPlus">Guohe</vendor>
 
     <description><![CDATA[
       自动生成android Selector Drawable&Color.<br>
@@ -66,7 +66,7 @@
 </table>
   <br/>
   <b>Plugin HomePage</b><br/>
-  这个插件是参考了<a href='https://github.com/inmite/android-selector-chapek' target="_blank">https://github.com/inmite/android-selector-chapek</a>和<a href="https://plugins.jetbrains.com/plugin/8153?pr=androidstudio" target="_blank">https://plugins.jetbrains.com/plugin/8153?pr=androidstudio</a>进行的修改，在此感谢。
+  这个插件是参考了<a href='https://github.com/skibug/SelectorGeneratorPlus' target="_blank">https://github.com/skibug/SelectorGeneratorPlus</a>增加mipmap支持。
 
   <br/>
   <b>1.1.0</b> (2017/10/25)
@@ -94,13 +94,13 @@
     <actions>
         <!-- Add your actions here -->
         <action id="com.guohe.selector.SelectDrawableAction"
-                class="com.guohe.selector.SelectDrawableAction" text="Generate Your SelectorDrawable "
+                class="com.guohe.selector.SelectDrawableAction" text="Generate  SelectorDrawable "
                 description="Please choose to generate the selector drawabel picture resource files (drawable XML files in the directory)">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="Images.EditExternally"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl B"/>
         </action>
         <action id="com.guohe.selector.SelectorColorAction"
-                class="com.guohe.selector.SelectorColorAction" text="Generate Your SelectorColor "
+                class="com.guohe.selector.SelectorColorAction" text="Generate SelectorColor "
                 description="description">
             <add-to-group group-id="XmlGenerateToolsGroup" anchor="before" relative-to-action="GenerateDTD"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl G"/>

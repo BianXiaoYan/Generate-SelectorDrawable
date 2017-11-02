@@ -1,21 +1,11 @@
-# SelectorGeneratorPlus
-Selector Generator Plus(快速生成SelectorDrawable和SelectorColor)
+# SelectorGenerator
+版本：1.0.0
 
-![readme_color](https://github.com/skibug/SelectorGeneratorPlus/blob/master/img/readme_color.png)
-![readme_drawable](https://github.com/skibug/SelectorGeneratorPlus/blob/master/img/readme_drawable.png)
-
+内容：增加了对mipmap的支持
 
 
-
-### 插件配置
-你可以在Android Studio的设置---other settings里设置
-
-1.开启自定义文件名称
-
-2.自动打开文件
-
+使用过程中如果有不懂可以咨询我(243716195@qq.com)
 
 ### 致谢
-这个插件是参考了[android-selector-chapek](https://github.com/inmite/android-selector-chapek)
-和[Selector Drawable Generator](https://plugins.jetbrains.com/plugin/8153?pr=androidstudio)
+这个插件是参考了[SelectorGeneratorPlus](https://github.com/skibug/SelectorGeneratorPlus)
 进行的修改，在此感谢。

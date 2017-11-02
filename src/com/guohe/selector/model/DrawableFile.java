@@ -10,6 +10,15 @@ public class DrawableFile implements Cloneable ,Comparable<DrawableFile>
     DrawableStatus drawableStatus;
     //文件对应状态的true,false
     private boolean status;
+    private boolean isDrawable;
+
+    public boolean isDrawable() {
+        return isDrawable;
+    }
+
+    public void setDrawable(boolean drawable) {
+        isDrawable = drawable;
+    }
 
     public String getSimpleName()
     {

@@ -9,6 +9,7 @@ public interface Constants
     public static final String DRAWABLE="drawable";
     public static final String COLOR="color";
     public static Pattern VALID_FOLDER_PATTERN = Pattern.compile("^drawable(-[a-zA-Z0-9]+)*$");
+    public static Pattern VALID_FOLDER_PATTERN_1 = Pattern.compile("^mipmap(-[a-zA-Z0-9]+)*$");
     public static final String SELECTOR_XML="_selector.xml";
 
 }
