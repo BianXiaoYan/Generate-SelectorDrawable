@@ -5,6 +5,7 @@
 
 
 使用过程中如果有不懂可以咨询我(243716195@qq.com)
+下载[SelectorGenerator](https://plugins.jetbrains.com/plugin/10144-selector-generator)
 
 ### 致谢
 这个插件是参考了[SelectorGeneratorPlus](https://github.com/skibug/SelectorGeneratorPlus)

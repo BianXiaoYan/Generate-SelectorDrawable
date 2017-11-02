@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-    <id>com.guohe.selector</id>
+    <id>com.bianxiaoyan.selector</id>
     <name>Selector Generator</name>
     <version>1.0.0</version>
     <vendor email="243716195@qq.com" url="https://github.com/BianXiaoYan/Generate-SelectorDrawable.git">Guohe</vendor>
