@@ -90,7 +90,6 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
-
     <actions>
         <!-- Add your actions here -->
         <action id="com.guohe.selector.SelectDrawableAction"
